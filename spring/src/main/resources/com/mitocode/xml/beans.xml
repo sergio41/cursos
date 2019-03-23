@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"> 
+	<!-- otros atributos para beans-->
+	<!-- default-init-method="initBean" default-destroy-method="destroyBean" Para definir los metodos que se llaman al inicializar o destruir cualquier bean definido dentro--> 
+
+	<!-- Para usar anotaciones de clico de vida:
+	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"></bean> -->
+	
+	<bean class="com.mitocode.beans.MitoCodeBeanPostProcessor"></bean> 
+
+	<bean id="personaInyeccionPorConstructor" class="com.mitocode.beans.PersonaInyeccionPorConstructor" lazy-init="true">
+		<constructor-arg index="0" type="int" value="1"></constructor-arg>
+		<constructor-arg index="2" value="Jaime"></constructor-arg>
+		<constructor-arg index="1" value="mitocode"></constructor-arg>
+	</bean>
+
+	<bean id="persona" class="com.mitocode.beans.Persona" autowire="byName" scope="singleton" lazy-init="true"> 
+	<!-- otros atributos para bean-->
+	<!-- name="personaBean2" sirve para poder referencias por este id al hacer el getBean-->
+	<!-- scope="prototype" al obtener el objeto serán instancias diferentes. Se inicializa al solicitar por getBean-->
+	<!-- scope="singleton" al obtener el objeto serán la misma instancia. Se inicializa en la carga de este xml-->
+	<!-- lazy-init="true" solo tiene sentido con sigleton. Es singleton, pero e inicializa al solicitar por getBean. Interesante en el rendimiento-->
+	<!-- init-method="init" destroy-method="destroy" Para definir los metodos de la clase que se llaman al inicializar el objeto y destruirlo-->
+		<!-- no hace falta por el autowire !Cuidado con autowire! no es recomendable con estructuras complejas
+		<property name="pais" ref="pais"></property>
+		<property name="ciudad" ref="ciudad"></property> 
+		-->
+		<property name="id" value="1"></property>
+		<property name="nombre" value="Jaime"></property>
+		<property name="apodo" value="mitocode"></property>
+	</bean>
+
+	<bean id="pais" class="com.mitocode.beans.Pais">
+		<property name="nombre" value="España"></property>
+		<!--<property name="ciudades">
+			<list>
+				<bean id="ciudad1" class="com.mitocode.beans.Ciudad">
+					<property name="nombre" value="Madrid"></property>
+				</bean>	
+				<bean id="ciudad2" class="com.mitocode.beans.Ciudad">
+					<property name="nombre" value="Bilbao"></property>
+				</bean>	
+				<bean id="ciudad3" class="com.mitocode.beans.Ciudad">
+					<property name="nombre" value="Oviedo"></property>
+				</bean>	
+			</list>
+		</property> -->
+	</bean>	
+	
+	<bean id="ciudad" class="com.mitocode.beans.Ciudad">
+		<property name="nombre" value="Madrid"></property>
+	</bean>	
+	
+	<!-- <alias name="persona" alias="personaBean"/> -->
+</beans>
