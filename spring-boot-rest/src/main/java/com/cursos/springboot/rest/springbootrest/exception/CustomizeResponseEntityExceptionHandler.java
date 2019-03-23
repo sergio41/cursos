@@ -23,6 +23,7 @@ public class CustomizeResponseEntityExceptionHandler extends ResponseEntityExcep
 	 * @param ex the target exception
 	 * @param request the current request
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@ExceptionHandler({Exception.class})
 	public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) throws Exception {
 		 
@@ -36,6 +37,7 @@ public class CustomizeResponseEntityExceptionHandler extends ResponseEntityExcep
 	 * @param ex the target exception
 	 * @param request the current request
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@ExceptionHandler({UserNotFoundException.class})
 	public final ResponseEntity<Object> handleUserNotFoundException(Exception ex, WebRequest request) throws Exception {
 		 
@@ -44,6 +46,7 @@ public class CustomizeResponseEntityExceptionHandler extends ResponseEntityExcep
 		return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(
 			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
